@@ -71,25 +71,44 @@ if(joystickGetDigital(1, 8, JOY_DOWN)){
 
 if(joystickGetDigital(1, 8, JOY_RIGHT)) {
   distanceToObject = ultrasonicGet(frontSonar);
-  //read the ultrasonic sensor
+
   printf("The distance to the object is %d \n", distanceToObject);
-  //print the value of the ultrasonic sensor
-  if (distanceToObject > 20) {
-    chassisSet(100, 100);
+
+  if ((distanceToObject > 25) && (distanceToObject < 100)) {
+    chassisSet(-50, 50);
   }
-  else if (distanceToObject < 16) {
-    chassisSet(-100, 100);
+  else if (distanceToObject < 10 && distanceToObject > 0) {
+    chassisSet(50, -50);
   }
+  else if (distanceToObject > 100 || distanceToObject < 0){
+    //printf("distanceToObject");
+    chassisSet(30, 30);
+    delay (1000);
+    int x = ultrasonicGet(frontSonar);
+    chassisSet(-30, -30);
+    delay(1500);
+    int y = ultrasonicGet(frontSonar);
+
+    if (x > y){
+      chassisSet(-50, -50);
+    }
+    else if (x < y){
+      chassisSet(50, 50);
+    }
+    else if (x < 1 && y < 1) {
+      chassisSet(30, 30);
+
+    }
+    }
+
+
   else{
     chassisSet(0, 0);
   }
-  //if (ultrasonic is > target follow distance) drive forward
-  //else if (ultrasonic is < target follow distance) drive back
-  //
+
 }
-// else stop
 
 
-delay(50);
+delay(100);
      }
    }

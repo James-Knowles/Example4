@@ -3,7 +3,7 @@
 
 #include "main.h"
 
-int Kp = 1;
+int kp = 1;
 
 void shoulderSet(int speed)
 {
@@ -16,7 +16,7 @@ void shoulderHold(int shoulderTarget){
  printf("The shoulder encoder value is %d\n", encoderGet(shoulderEncoder));
  int counts = encoderGet(shoulderEncoder);
  int error = shoulderTarget - counts;
- shoulderSet(Kp * error);
+ shoulderSet(kp * error);
  }
 
 #endif
