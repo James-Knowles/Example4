@@ -14,7 +14,7 @@ int MAX_OUT = 127;
 void operatorControl() {
    int loopCount = 0; //just a loop counter
 	 int power, turn;
-   int distanceToObject;
+   int distanceToObject, distanceToObject2 = 0, distanceToObject3 = 0;
 
    while(1) {
        //drive base control
@@ -80,7 +80,7 @@ if(joystickGetDigital(1, 8, JOY_RIGHT)) {
   else if (distanceToObject < 10 && distanceToObject > 0) {
     chassisSet(50, -50);
   }
-  else if (distanceToObject > 100 || distanceToObject < 0){
+  else if (distanceToObject > 100){
     //printf("distanceToObject");
     chassisSet(30, 30);
     delay (1000);
@@ -100,14 +100,18 @@ if(joystickGetDigital(1, 8, JOY_RIGHT)) {
 
     }
     }
-
+else if  (distanceToObject < 0 && distanceToObject2 < 0 && distanceToObject3 < 0)
+{
+printf("error case")	
+}
 
   else{
     chassisSet(0, 0);
   }
 
 }
-
+distanceToObject2 = distanceToObject
+distanceToObject3 = distanceToObject2  
 
 delay(100);
      }
