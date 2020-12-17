@@ -11,10 +11,14 @@ int shoulderTarget = 45;
 int elbowTarget = 90;
 int MAX_OUT = 127;
 
+
+
 void operatorControl() {
    int loopCount = 0; //just a loop counter
-	 int power, turn;
-   int distanceToObject, distanceToObject2 = 0, distanceToObject3 = 0;
+	 int power, turn, rR, lL, mM;
+   int distanceToObject;
+   int distanceToObject2 = 0;
+   int distanceToObject3 = 0;
 
    while(1) {
        //drive base control
@@ -100,18 +104,59 @@ if(joystickGetDigital(1, 8, JOY_RIGHT)) {
 
     }
     }
-else if  (distanceToObject < 0 && distanceToObject2 < 0 && distanceToObject3 < 0)
-{
-printf("error case")	
-}
+    else if  (distanceToObject < 0 && distanceToObject2 < 0 && distanceToObject3 < 0){
+      chassisSet(30, 30);
+      delay (1300);
+      int x = ultrasonicGet(frontSonar);
+      chassisSet(-30, -30);
+      delay(1500);
+      int y = ultrasonicGet(frontSonar);
+
+      if (x > y){
+        chassisSet(-50, -50);
+      }
+      else if (x < y){
+        chassisSet(50, 50);
+      }
+      else if (x < 1 && y < 1) {
+        chassisSet(30, 30);
+
+      }
+    }
 
   else{
     chassisSet(0, 0);
   }
 
 }
-distanceToObject2 = distanceToObject
-distanceToObject3 = distanceToObject2  
+distanceToObject2 = distanceToObject;
+distanceToObject3 = distanceToObject2;
+
+
+
+
+if(joystickGetDigital(1, 8, JOY_LEFT)){
+  rR = analogReadCalibrated(1);
+  lL = analogReadCalibrated(3);
+  mM = analogReadCalibrated(2);
+
+  printf("Line tracker values are L %d R %d M %d \n", lL, rR, mM);
+
+  //if (mM > rR && mM > lL){
+    //chassisSet(-60, 60);
+  //}
+  //else if (rR > mM && rR > lL){
+    //chassisSet(60, 60);
+  //}
+  //else if (lL > mM && lL > rR){
+    //chassisSet(-60, -60);
+  //  }
+  //else{
+    //chassisSet(60, -60);
+    //}
+}
+
+
 
 delay(100);
      }
