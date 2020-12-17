@@ -10,7 +10,7 @@ void homeShoulder(int homePosition) {
     printf("shoulder homing started, stand by \n");
 
 while (digitalRead(3) == 1) { //while loops with condition lowerLimit == 1
-  printf("The lowerLimit switch is \n");
+  printf("The lowerLimit switch is %d\n", encoderGet(shoulderEncoder));
   shoulderSet(60); //turn on shoulder in neg direction
 }
     shoulderSet(0); // stop shoulder motor

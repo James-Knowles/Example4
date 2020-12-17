@@ -142,18 +142,18 @@ if(joystickGetDigital(1, 8, JOY_LEFT)){
 
   printf("Line tracker values are L %d R %d M %d \n", lL, rR, mM);
 
-  //if (mM > rR && mM > lL){
-    //chassisSet(-60, 60);
-  //}
-  //else if (rR > mM && rR > lL){
-    //chassisSet(60, 60);
-  //}
-  //else if (lL > mM && lL > rR){
-    //chassisSet(-60, -60);
-  //  }
-  //else{
-    //chassisSet(60, -60);
-    //}
+  if (mM > rR && mM > lL){
+    chassisSet(-60, 60);
+  }
+  else if (rR > mM && rR > lL){
+    chassisSet(60, 60);
+  }
+  else if (lL > mM && lL > rR){
+    chassisSet(-60, -60);
+    }
+  else{
+    chassisSet(60, -60);
+    }
 }
 
 
