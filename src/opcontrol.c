@@ -96,10 +96,10 @@ if(joystickGetDigital(1, 8, JOY_RIGHT)) {
     int y = ultrasonicGet(frontSonar);
     printf("y value is %d \n", y);
 
-    if (x > 0){
+    if (x > y){
       chassisSet(60, 60);
     }
-    if (y > 0){
+    if (y > x){
       chassisSet(-60, -60);
     }
     //else if (x < 1 && y < 1) {
@@ -117,10 +117,10 @@ if(joystickGetDigital(1, 8, JOY_RIGHT)) {
       int y = ultrasonicGet(frontSonar);
       printf("y value is %d \n", y);
 
-      if (x > 0){
+      if (x > y){
         chassisSet(60, 60);
       }
-      if (y > 0){
+      if (y > x){
         chassisSet(-60, -60);
       }
       //else if (x < 1 && y < 1) {
