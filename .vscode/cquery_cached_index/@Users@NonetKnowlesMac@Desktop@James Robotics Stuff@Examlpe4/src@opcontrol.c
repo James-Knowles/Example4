@@ -13,6 +13,7 @@ int MAX_OUT = 127;
 
 
 
+
 void operatorControl() {
    int loopCount = 0; //just a loop counter
 	 int power, turn, rR, lL, mM;
@@ -89,39 +90,43 @@ if(joystickGetDigital(1, 8, JOY_RIGHT)) {
     chassisSet(30, 30);
     delay (1000);
     int x = ultrasonicGet(frontSonar);
+    printf("x value is %d \n", x);
     chassisSet(-30, -30);
     delay(1500);
     int y = ultrasonicGet(frontSonar);
+    printf("y value is %d \n", y);
 
-    if (x > y){
-      chassisSet(-50, -50);
+    if (x > 0){
+      chassisSet(60, 60);
     }
-    else if (x < y){
-      chassisSet(50, 50);
+    if (y > 0){
+      chassisSet(-60, -60);
     }
-    else if (x < 1 && y < 1) {
-      chassisSet(30, 30);
+    //else if (x < 1 && y < 1) {
+      //chassisSet(30, 30);
 
-    }
+    //}
     }
     else if  (distanceToObject < 0 && distanceToObject2 < 0 && distanceToObject3 < 0){
       chassisSet(30, 30);
       delay (1300);
       int x = ultrasonicGet(frontSonar);
+      printf("x value is %d \n", x);
       chassisSet(-30, -30);
       delay(1500);
       int y = ultrasonicGet(frontSonar);
+      printf("y value is %d \n", y);
 
-      if (x > y){
-        chassisSet(-50, -50);
+      if (x > 0){
+        chassisSet(60, 60);
       }
-      else if (x < y){
-        chassisSet(50, 50);
+      if (y > 0){
+        chassisSet(-60, -60);
       }
-      else if (x < 1 && y < 1) {
-        chassisSet(30, 30);
+      //else if (x < 1 && y < 1) {
+        //chassisSet(30, 30);
 
-      }
+      //}
     }
 
   else{
@@ -142,17 +147,21 @@ if(joystickGetDigital(1, 8, JOY_LEFT)){
 
   printf("Line tracker values are L %d R %d M %d \n", lL, rR, mM);
 
-  if (mM > rR && mM > lL){
-    chassisSet(-60, 60);
+  if (mM > 100 + rR && mM > 100 + lL){
+    chassisSet(-20, 20);
+    int finalCommand = 1;
   }
-  else if (rR > mM && rR > lL){
-    chassisSet(60, 60);
+  else if (rR > 100 + mM && rR > 100 + lL){
+    chassisSet(-25, -25);
+    int finalCommand = 2;
   }
-  else if (lL > mM && lL > rR){
-    chassisSet(-60, -60);
+  else if (lL > 100 + mM && lL > 100 + rR){
+    chassisSet(25, 25);
+    int finalCommand = 3;
     }
+
   else{
-    chassisSet(60, -60);
+    chassisSet(20, -20);
     }
 }
 
